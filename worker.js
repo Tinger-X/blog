@@ -113,7 +113,7 @@ Disallow: /admin`,//robots.txt设置
     //开启全局html标签解析-不推荐
     //mdEditor.settings.htmlDecode=true;
     
-    window.mdEditor=mdEditor;    
+    window.mdEditor=mdEditor;
     //editormd工具栏上添加html标签解析开关
     mdEditor.getToolbarHandles().parseHtml=function(){
       let ele = $(".editormd-menu li a i:last");
