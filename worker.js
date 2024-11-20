@@ -3,8 +3,8 @@ const ACCOUNT = { //账号相关，安全性更高
     "user": "<your-admin-here>", //博客后台用户名
     "password": "<your-password-here>", //博客后台密码
     "third_token": "cfblog", //开放token，当前仅允许访问/admin/search.xml，/admin/sitemap.xml时可用，在cfblog_token的头信息中传递
-    "cacheZoneId":"<your-id-here>",  //区域 ID
-    "cacheToken":"<your-token-here>",  //API token
+    "cacheZoneId": "<your-id-here>",  //区域 ID
+    "cacheToken": "<your-token-here>",  //API token
     "kv_var": this['<your-kv-name-here>']  //workers绑定kv时用的变量名
 }
 const Prefix = "https://cdn.jsdelivr.net/gh/Tinger-X/blog@master";  // jsdelivr分发地址，
@@ -236,10 +236,10 @@ async function handlerRequest(event) {
     //设置浏览器缓存时间:后台不缓存、只缓存前台
     try {
         if ("admin" == paths[0]) {
-            k.headers.set("Cache-Control", "no-store")
+            k.headers.set("Cache-Control", "no-store");
         } else {
             k.headers.set("Cache-Control", "public, max-age=" + OPT.cacheTime),
-                event.waitUntil(D.put(M, k.clone()))
+            event.waitUntil(D.put(M, k.clone()));
         }
     } catch (e) { }
 

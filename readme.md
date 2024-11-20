@@ -16,6 +16,12 @@
 
 1. 文章独立密码
 
+
+## 部署
+1. fork该项目
+2. 修改`worker.js`中的`ACCOUNT.*`、`Prefix`、`OPT.siteDomain`
+3. 将`worker.js`部署到cloudflare的worker，之后绑定kv即可
+
 ---
 
 > 这是一个运行在cloudflare workers 上的博客程序,使用 cloudflare KV作为数据库,无其他依赖.
