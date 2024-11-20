@@ -129,7 +129,7 @@ Disallow: /admin`,//robots.txt设置
     setTimeout(function(){
       $(".editormd-menu").append('<li class="divider" unselectable="on">|</li><li><a href="javascript:;" title="解析HTML标签" unselectable="on"><i class="fa fa-toggle-off" name="parseHtml" unselectable="on"> 解析HTML标签 </i></a></li>')
       mdEditor.setToolbarHandler(mdEditor.getToolbarHandles())
-    },300);
+    }, 3000);
 
     //默认图片，工具：https://tool.lu/imageholder/
     if($('#img').val()=="")$('#img').val('${Prefix}/static/cfblog-plus.png');
