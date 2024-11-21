@@ -8,7 +8,7 @@ const ACCOUNT = {  // 账号相关，安全性更高
     "cacheToken": "<your-token-here>",  // API token
     "kv_var": this['<your-kv-name-here>']  // workers绑定kv时用的变量名
 };
-const Prefix = "https://cdn.jsdelivr.net/gh/Tinger-X/blog@master";  // jsdelivr分发地址，
+const Prefix = "https://cdn.jsdelivr.net/gh/Tinger-X/blog@master";  // jsdelivr分发地址，需要修改用户名为你的github用户名
 const OPT = {  // 网站配置
     /*--前台参数--*/
     "siteDomain": "<your-domain-here>",  // 域名(不带https 也不带/)
