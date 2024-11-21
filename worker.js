@@ -525,7 +525,7 @@ async function handle_article(id) {
         cfg.prefix = Prefix;
 
     //使用mustache.js渲染页面（参数替换）
-    cfg.OPT = OPT
+    cfg.OPT = OPT;
 
     let html = Mustache.render(theme_html, cfg)
 
