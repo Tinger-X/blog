@@ -828,20 +828,16 @@ async function handle_admin(request) {
     //删除
     if ("delete" == paths[1]) {
         let id = paths[2]
-        if (6 == id.length) {
-            await CFBLOG.delete(id);
-            let e = await getAllArticlesList();
-            for (r = 0; r < e.length; r++) {
-                if (id == e[r].id) {
-                    e.splice(r, 1);
+        await CFBLOG.delete(id);
+        let e = await getAllArticlesList();
+        for (r = 0; r < e.length; r++) {
+            if (id == e[r].id) {
+                e.splice(r, 1);
 
-                    await saveArticlesList(JSON.stringify(e))
-                    json = '{"msg":"Delete (' + id + ')  OK","rst":true,"id":"' + id + '"}'
-                    break;
-                }
+                await saveArticlesList(JSON.stringify(e))
+                json = '{"msg":"Delete (' + id + ')  OK","rst":true,"id":"' + id + '"}'
+                break;
             }
-        } else {
-            json = '{"msg":"Delete  false ","rst":false,"id":"' + id + '"}'
         }
     }
 
