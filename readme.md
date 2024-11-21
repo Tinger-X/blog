@@ -1,3 +1,7 @@
+## 源项目
++ [https://github.com/gdtool/cloudflare-workers-blog](https://github.com/gdtool/cloudflare-workers-blog)
++ [https://github.com/Arronlong/cfblog-plus](https://github.com/Arronlong/cfblog-plus)
+
 本项目**Tinger Blog**是由基于[gdtool/cloudflare-workers-blog](https://github.com/gdtool/cloudflare-workers-blog)、[https://github.com/Arronlong/cfblog-plus](https://github.com/Arronlong/cfblog-plus)二次开发而来，主要是对cf worker中的js进行自主开源，并扩展了许多功能。
 
 ## 与CF-Blog相比，有哪些变更：
@@ -18,9 +22,16 @@
 
 
 ## 部署
-1. fork该项目
-2. 修改`worker.js`中的`ACCOUNT.*`、`Prefix`、`OPT.siteDomain`
+1. 将[https://github.com/Tinger-X/blog](https://github.com/Tinger-X/blog) Fork到自己的账户中
+2. 在Cloudflare的域名管理中获取自己的`区域ID`、`API Token`
 3. 将`worker.js`部署到cloudflare的worker，之后绑定kv即可
+4. 将`worker.js`中的`ACCOUNT.*`、`Proxy`、`OPT.siteDomain`改为自己的信息
+5. 将修改后的`worker.js`内容复制到Cloudflare新建的worker中，保存并部署
+6. 将kv存储空间绑定到该worker
+7. 新建域指向该worker
+
+**！完成！**
+
 
 ---
 

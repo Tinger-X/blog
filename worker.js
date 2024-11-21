@@ -1054,7 +1054,6 @@ async function getThemeHtml(template_path) {
 
 //根据文章id，返回上篇、下篇文章，文章内容页底部会用到
 async function getSiblingArticle(id) {
-    id = ("00000" + parseInt(id)).substr(-6);
     //读取文章列表，查找指定id的文章
     let articles_all = await getArticlesList(),
         article_idx = -1;
