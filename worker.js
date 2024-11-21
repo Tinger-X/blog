@@ -18,8 +18,9 @@ const OPT = { //网站配置
     "theme_github_path": `${Prefix}/themes/`,//主题路径
     "themeURL": `${Prefix}/themes/JustNews/`, // 模板地址,以 "/"" 结尾
 
-    "pageSize": 5,//每页文章数
-    "recentlySize": 6,//最近文章数
+    "startId": 245,  //文章起始ID
+    "pageSize": 10,//每页文章数
+    "recentlySize": 3,//最近文章数
     "recentlyType": 1,//最近文章类型：1-按创建时间倒序（按id倒序），2-按修改时间排序
     "readMoreLength": 150,//阅读更多截取长度
     "cacheTime": 60 * 60 * 24 * 2, //文章在浏览器的缓存时长(秒),建议=文章更新频率
@@ -158,6 +159,12 @@ Disallow: /admin`,//robots.txt设置
     //置顶样式对于前台来说，与codeBeforHead结合即可
     if (OPT.top_flag_style) {
         OPT.codeBeforHead += OPT.top_flag_style
+    }
+    if (OPT.startId.constructor !== Number) {
+        OPT.startId = 0;
+    }
+    if (OPT.startId < 0) {
+        OPT.startId = 0;
     }
 }
 
@@ -1134,15 +1141,15 @@ async function parseReq(request) {
 
 //为文章分配ID
 async function generateId() {
-    //KV中读取文章数量（初始化为1），并格式化为6位，不足6位前面补零
+    //KV中读取并更新文章ID，返回可用的文章ID
     let article_id_seq = await getIndexNum();
-    if ("" === article_id_seq || null === article_id_seq || "[]" === article_id_seq || void 0 === article_id_seq) {
-        await saveIndexNum(1)
-        return "000001"
-    } else {
-        await saveIndexNum(parseInt(article_id_seq) + 1)
-        return ("00000" + (parseInt(article_id_seq) + 1)).substr(-6)
+    if (null === article_id_seq) {
+        await saveIndexNum(OPT.startId);
+        return OPT.startId.toString();
     }
+    article_id_seq = +article_id_seq + 1;
+    await saveIndexNum(article_id_seq);
+    return article_id_seq.toString();
 }
 
 /**------【⑤.术业有专攻，读写KV方法集】-----**/
@@ -1174,7 +1181,7 @@ async function getAllArticlesList() {
 }
 //KV读取，最新文章序号（不删除文章时，等于文章数量），用于计算下个文章id
 async function getIndexNum() {
-    return await getKV("SYSTEM_INDEX_NUM", true);
+    return await CFBLOG.get("SYSTEM_INDEX_NUM");
 }
 //KV读取，获取导航栏
 async function getWidgetMenu() {
