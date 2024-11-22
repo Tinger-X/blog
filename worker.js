@@ -8,8 +8,7 @@ const ACCOUNT = {  // 账号相关，安全性更高
     "cacheToken": "<your-token-here>",  // API token
     "kv_var": this['<your-kv-name-here>']  // workers绑定kv时用的变量名
 };
-// 刷新jsdelivr缓存：https://purge.jsdelivr.net/gh/Tinger-X/blog@master
-const Prefix = "https://cdn.jsdelivr.net/gh/Tinger-X/blog@master";  // jsdelivr分发地址，需要修改用户名为你的github用户名
+const Prefix = "https://cdn.jsdelivr.net/gh/Tinger-X/blog@master";  // jsdelivr分发地址，末尾不可有/，需要修改用户名为你的github用户名
 const OPT = {  // 网站配置
     /*--前台参数--*/
     "siteDomain": "<your-domain-here>",  // 域名(不带https 也不带/)
@@ -179,8 +178,7 @@ async function handlerRequest(event) {
     let request = event.request;
     // 获取url请求对象
     let url = new URL(request.url);
-    // @ts-ignore
-    let paths = url.pathname.trim("/").split("/");
+    let paths = url.pathname.del_sides("/").split("/");
 
     // 校验权限
     if (("admin" == paths[0] || true === OPT.privateBlog) && !parseBasicAuth(request)) {
@@ -375,7 +373,7 @@ async function renderBlog(url) {
      *  域名/tags/xxx      标签页，等价于域名/tags/xxx/page/1
      *  域名/tags/xxx/page/xxx  分类页+翻页
      */
-    let paths = url.pathname.trim("/").split("/");
+    let paths = url.pathname.del_sides("/").split("/");
     let articles = [], pageNo = 1;
     // 获取文章列表
     switch (paths[0] || "page") {
@@ -496,8 +494,7 @@ async function handle_article(id) {
 // 后台请求处理
 async function handle_admin(request) {
     let url = new URL(request.url),
-        // @ts-ignore
-        paths = url.pathname.trim("/").split("/"),
+        paths = url.pathname.del_sides("/").split("/"),
         html,  // 返回html
         json,  // 返回json
         file;  // 返回文件
@@ -721,7 +718,7 @@ async function handle_admin(request) {
             contentHtml.length > 0
         ) {
             id = await generateId();
-            contentText = contentHtml.replace(/<\/?[^>]*>/g, "").trim().substring(0, OPT.readMoreLength);  // 摘要
+            contentText = contentHtml.replace(/<\/?[^>]*>/g, "").del_sides().substring(0, OPT.readMoreLength);  // 摘要
             // 组装文章json
             let article = {
                 id: id,
@@ -818,7 +815,7 @@ async function handle_admin(request) {
             contentMD.length > 0 &&
             contentHtml.length > 0
         ) {
-            contentText = contentHtml.replace(/<\/?[^>]*>/g, "").trim().substring(0, OPT.readMoreLength);  // 摘要
+            contentText = contentHtml.replace(/<\/?[^>]*>/g, "").del_sides().substring(0, OPT.readMoreLength);  // 摘要
             // 组装文章json
             let article = {
                 id: id,
@@ -914,8 +911,7 @@ function parseBasicAuth(request) {
         if (token) {
             // 获取url请求对象
             let url = new URL(request.url);
-            // @ts-ignore
-            let paths = url.pathname.trim("/").split("/");
+            let paths = url.pathname.del_sides("/").split("/");
 
             // 校验权限
             if ("admin" == paths[0] && ("search.xml" == paths[1] || "sitemap.xml" == paths[1])) {
@@ -1193,9 +1189,17 @@ async function saveArticle(id, value) {
 
 /**------【⑥.站在巨人肩膀上，基础方法】-----**/
 // 扩展String的方法：
-// trim清除前后空格
-String.prototype.trim = function (t) {
-    return t ? this.replace(new RegExp("^\\" + t + "+|\\" + t + "+$", "g"), "") : this.replace(/^\s+|\s+$/g, "");
+// del_sides清除指定边界的指定字符，默认为清除两边的空格
+String.prototype.del_sides = function (char, type) {
+    if (char) {
+        if (type == "left") {
+            return this.replace(new RegExp("^\\" + char + "+", "g"), "");
+        } else if (type == "right") {
+            return this.replace(new RegExp("\\" + char + "+$", "g"), "");
+        }
+        return this.replace(new RegExp("^\\" + char + "+|\\" + char + "+$", "g"), "");
+    }
+    return this.replace(/^\s+|\s+$/g, "");
 }
 // @ts-ignore replaceHtmlPara替换<!--{参数}-->
 String.prototype.replaceHtmlPara = function (t, e) {
