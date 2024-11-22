@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdn.staticfile.org/bootstrap-select/1.9.4/css/bootstrap-select.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/editor.md@1.5.0/css/editormd.css" />
+    <link rel="stylesheet" href="<!--{prefix}-->/editormd/css/editormd.css" />
     
     <script src="<!--{prefix}-->/static/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -162,7 +162,7 @@
 	</div>	
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/editor.md@1.5.0/editormd.js"></script>   
+<script src="<!--{prefix}-->/editormd/editormd.js"></script>   
 <script type="text/javascript">
 	$(function() {
 		$('#myTab li:eq(0) 1').tab('show');
@@ -174,7 +174,7 @@
 		var mdEditor = editormd("content", {
 				// width  : "90%",
 				 height : 640,
-				path   : "https://cdn.jsdelivr.net/npm/editor.md@1.5.0/lib/",
+				path   : "<!--{prefix}-->/editormd/lib/",
 				appendMarkdown : "# MarkDown", 
 				saveHTMLToTextarea : true,
 				mode : "markdown",
