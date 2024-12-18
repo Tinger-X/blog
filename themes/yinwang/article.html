@@ -1,42 +1,48 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>{{ &title }}</title>
-		<meta name="keywords" content="{{ &keyWords }}" />
-		<meta name="description" content="{{ &OPT.siteDescription }}" />
-		<meta http-equiv="content-type" content="text/html; charset=utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=0.5">
-		<link rel="stylesheet" href="{{ &prefix }}/static/xcode.min.css">
-		<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-		<script src="{{ &prefix }}/static/jquery-3.5.1.min.js" type="text/javascript"></script>
-		
-		<link rel="stylesheet" href="{{ &OPT.theme_github_path }}yinwang/files/bootstrap-tooltips.css">
-		<link rel="stylesheet" href="{{ &OPT.theme_github_path }}yinwang/files/bootstrap-theme.min.css">
-		<link rel="stylesheet" href="{{ &OPT.theme_github_path }}yinwang/files/post.css">
-		
-		{{ &OPT.codeBeforHead }}
-	</head>
-	<body>
-		<script type="text/javascript">if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent)) {
-				document.body.classList.add('mobile')
-			}</script>
-		<div>
-			<div class="inner">
-				<h2>{{ &articleSingle.title }}</h2>
-				{{ &articleSingle.contentHtml }}
-			</div>
-		</div>
-	</body>
-	
-	<script src="{{ &prefix }}/static/highlight.min.js" type="text/javascript"></script>
-	<script src="{{ &OPT.theme_github_path }}yinwang/files/main.js" type="text/javascript"></script>
-	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js/bootstrap.min.js" type="text/javascript"></script>
 
-	<script type="text/javascript">window.dataLayer = window.dataLayer || [];
-		function gtag() {
-			dataLayer.push(arguments);
-		}
-		gtag('js', new Date());
-		gtag('config', 'UA-160006603-1');</script>
-	{{ &OPT.codeBeforBody }}
+<head>
+	<title>{{ &title }}</title>
+	<meta name="keywords" content="{{ &keyWords }}" />
+	<meta name="description" content="{{ &OPT.siteDescription }}" />
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=0.5">
+	<link rel="stylesheet" href="{{ &prefix }}/static/xcode.min.css">
+	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="{{ &prefix }}/static/jquery-3.5.1.min.js" type="text/javascript"></script>
+
+	<link rel="stylesheet" href="{{ &OPT.theme_github_path }}yinwang/files/bootstrap-tooltips.css">
+	<link rel="stylesheet" href="{{ &OPT.theme_github_path }}yinwang/files/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="{{ &OPT.theme_github_path }}yinwang/files/post.css">
+
+	{{ &OPT.codeBeforHead }}
+</head>
+
+<body>
+	<script type="text/javascript">
+		if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent)) {
+			document.body.classList.add('mobile')
+		}</script>
+	<div>
+		<div class="inner">
+			<h2>{{ &articleSingle.title }}</h2>
+			{{ &articleSingle.contentHtml }}
+		</div>
+	</div>
+</body>
+
+<script src="{{ &prefix }}/static/highlight.min.js" type="text/javascript"></script>
+<script src="{{ &OPT.theme_github_path }}yinwang/files/main.js" type="text/javascript"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js/bootstrap.min.js"
+	type="text/javascript"></script>
+
+<script type="text/javascript">window.dataLayer = window.dataLayer || [];
+	function gtag() {
+		dataLayer.push(arguments);
+	}
+	gtag('js', new Date());
+	gtag('config', 'UA-160006603-1');
+</script>
+{{ &OPT.codeBeforBody }}
+
 </html>
